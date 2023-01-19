@@ -3,7 +3,7 @@
 public class BakedDependenciesRoot
 {
     private RootComponent _rootComponent;
-    private List<object> _bakedComponents = new();
+    private List<IInjectableComponent> _bakedComponents = new();
 
     public RootComponent InstallComponent => _rootComponent;
 
@@ -19,12 +19,16 @@ public class BakedDependenciesRoot
         return component is not null ? (T)component : default;
     }
 
-    public void BakeComponent(object newComponent)
+    public void BakeComponent(IInjectableComponent newComponent)
     {
-        object sameComponent = _bakedComponents.Find((component) => component.GetType() == newComponent.GetType());
+        IInjectableComponent sameComponent = _bakedComponents.Find((component) => component.GetType() == newComponent.GetType());
 
         if (sameComponent is not null)
+        {
+            sameComponent.Away();
             _bakedComponents.Remove(sameComponent);
+        }
+            
 
         _bakedComponents.Add(newComponent);
     }

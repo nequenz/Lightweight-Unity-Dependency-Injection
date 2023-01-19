@@ -13,6 +13,7 @@ public class DependenciesService : MonoBehaviour
 
     }
 
+
     [ContextMenu("Resolve All Dependencies")]
     private void ResolveAllDependencies()
     {
@@ -50,7 +51,11 @@ public class DependenciesService : MonoBehaviour
 
         if (needComponent is null)
         {
-            installer = _dependenciesContainer.FindInstaller(currentType);//throw ex
+            installer = _dependenciesContainer.FindInstaller(currentType);
+
+            if (installer is null)
+                return default;
+
             needComponent = installer.Resolve<I>();
 
             if (needComponent is not null)

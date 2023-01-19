@@ -52,13 +52,12 @@ public abstract class RootComponent : MonoBehaviour
     {
     }
 
+    public abstract void ResolveDependencies();
+
     public I ResolveComponent<I>() where I : IInjectableComponent
     {
         return _dependenciesService.ResolveComponent<I>(GetType(),this);
     }
 
-    public virtual void ResolveDependencies()
-    {
 
-    }
 }
