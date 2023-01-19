@@ -10,12 +10,8 @@ public class DependenciesService : MonoBehaviour
 
     private void InitDependencies()
     {
-        _dependenciesContainer.Select<RotatorRight>();
 
-        _dependenciesContainer.Select<CubeInstaller>()
-            .Bind<IRotator, RotatorLeft>(TypeParams.Instance);
     }
-
 
     [ContextMenu("Resolve All Dependencies")]
     private void ResolveAllDependencies()
